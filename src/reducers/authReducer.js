@@ -1,7 +1,8 @@
 const defaultState = {
     name: '',
     username: '',
-    password: ''
+    password: '',
+    showPass: false
 };
 
 function authReducer (state = defaultState, action) {
