@@ -6,7 +6,8 @@ import {
     changePassword,
     changeConfirmPassword,
     showPassword,
-    showConfirmPassword
+    showConfirmPassword,
+    createUser
     } from '../actions';
 
 import clsx from 'clsx';
@@ -51,11 +52,24 @@ function signup (props) {
         event.preventDefault();
     };
 
+    const submitHandler = (e) => {
+        e.preventDefault();
+        if (props.password === props.confirmPass){
+            props.createUser({
+                name: props.name,
+                username: props.username,
+                password: props.password
+            }, props);
+        } else {
+            alert('Passwords Do Not Match');
+        };  
+    };
+
     return(
         <div>
             <h1> Sign Up Page</h1>
 
-            <form>
+            <form onSubmit={e => submitHandler(e)}>
             <FormControl className={clsx(classes.margin, classes.textField)}>
                 <InputLabel htmlFor="standard-start-name">Name</InputLabel>
                 <Input
@@ -116,7 +130,7 @@ function signup (props) {
                 />
             </FormControl>
             <br /> <br />
-            <Button variant="outlined" color="primary" className={buttonStyle.button}>
+            <Button type='submit' variant="outlined" color="primary" className={buttonStyle.button}>
                 Create User
             </Button>
             </form>
@@ -143,5 +157,6 @@ export default connect(msp,{
     changePassword,
     changeConfirmPassword,
     showPassword,
-    showConfirmPassword
+    showConfirmPassword,
+    createUser
 })(signup);

@@ -2,6 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import login from './containers/login';
 import signup from './containers/signup';
+import userPage from './containers/userPage';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Switch>
           <Route path='/login' component={login}/>
           <Route path='/signup' component={signup}/>
+          <Route path='/userPage/:username' component={userPage}/>
         </Switch>
       </Router>
     </div>

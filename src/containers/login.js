@@ -4,6 +4,7 @@ import {
     changeUsername,
     changePassword,
     showPassword,
+    logInUser
     } from '../actions';
 
 import clsx from 'clsx';
@@ -48,11 +49,19 @@ function login (props) {
         event.preventDefault();
     };
 
+    const submitHandler = (e) => {
+        e.preventDefault();
+        props.logInUser({
+            username: props.username,
+            password: props.password
+        },props); 
+    };
+
     return(
         <div>
             <h1> Log In Page</h1>
 
-            <form>
+            <form onSubmit={e => submitHandler(e)}>
             <FormControl className={clsx(classes.margin, classes.textField)}>
                 <InputLabel htmlFor="standard-start-username">Username</InputLabel>
                 <Input
@@ -83,7 +92,7 @@ function login (props) {
                 />
             </FormControl>
             <br /> <br />
-            <Button variant="outlined" color="primary" className={buttonStyle.button}>
+            <Button type='submit' variant="outlined" color="primary" className={buttonStyle.button}>
                 Log In
             </Button>
             </form>
@@ -105,4 +114,5 @@ export default connect(msp,{
     changeUsername,
     changePassword,
     showPassword,
+    logInUser
 })(login);
