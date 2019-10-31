@@ -24,6 +24,8 @@ function authReducer (state = defaultState, action) {
             return {...state, showConfirmPass: !state.showConfirmPass};
         case 'SET CURRENT USER':
             return {...state, currentUser: action.payload,};
+        case 'LOGOUT':
+            return {...state, currentUser: null};
         default:
             return state;
     }

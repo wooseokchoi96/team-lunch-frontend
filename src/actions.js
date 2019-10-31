@@ -70,6 +70,11 @@ function logInUser (userObj, props) {
     }
 }
 
+function logOut (props) {
+    props.history.push('/');
+    return {type: 'LOGOUT'};
+}
+
 
 export {
     changeName,
@@ -79,5 +84,6 @@ export {
     showPassword,
     showConfirmPassword,
     createUser,
-    logInUser
+    logInUser,
+    logOut
 };
