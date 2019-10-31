@@ -1,18 +1,26 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {
+    changeName, 
+    changeUsername,
+    changePassword,
+    changeConfirmPassword,
+    showPassword,
+    showConfirmPassword
+    } from '../actions';
+
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
-import TextField from '@material-ui/core/TextField';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
 
-function signup () {
+function signup (props) {
 
     const classes = makeStyles(theme => ({
         root: {
@@ -49,22 +57,20 @@ function signup () {
 
             <form>
             <FormControl className={clsx(classes.margin, classes.textField)}>
-                <InputLabel htmlFor="standard-start-adornment">Name</InputLabel>
+                <InputLabel htmlFor="standard-start-name">Name</InputLabel>
                 <Input
-                    id="standard-start-adornment"
-                    // type={values.showPassword ? 'text' : 'password'}
-                    // value={values.password}
-                    // onChange={handleChange('password')}
+                    id="standard-start-name"
+                    value={props.name}
+                    onChange={(e) => props.changeName(e.target.value)}
                 />
             </FormControl>
             <br />
             <FormControl className={clsx(classes.margin, classes.textField)}>
-                <InputLabel htmlFor="standard-start-adornment">Username</InputLabel>
+                <InputLabel htmlFor="standard-start-username">Username</InputLabel>
                 <Input
-                    id="standard-start-adornment"
-                    // type={values.showPassword ? 'text' : 'password'}
-                    // value={values.password}
-                    // onChange={handleChange('password')}
+                    id="standard-start-username"
+                    value={props.username}
+                    onChange={(e) => props.changeUsername(e.target.value)}
                 />
             </FormControl>
             <br />
@@ -72,17 +78,17 @@ function signup () {
                 <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
                 <Input
                     id="standard-adornment-password"
-                    // type={values.showPassword ? 'text' : 'password'}
-                    // value={values.password}
-                    // onChange={handleChange('password')}
+                    type={props.showPass ? 'text' : 'password'}
+                    value={props.password}
+                    onChange={(e) => props.changePassword(e.target.value)}
                     endAdornment={
                     <InputAdornment position="end">
                         <IconButton
                         aria-label="toggle password visibility"
-                        //   onClick={handleClickShowPassword}
+                        onClick={() => props.showPassword()}
                         onMouseDown={handleMouseDownPassword}
                         >
-                        {/* {values.showPassword ? <Visibility /> : <VisibilityOff />} */}
+                        {props.showPass ? <Visibility /> : <VisibilityOff />}
                         </IconButton>
                     </InputAdornment>
                     }
@@ -90,20 +96,20 @@ function signup () {
             </FormControl>
             <br />
             <FormControl className={clsx(classes.margin, classes.textField)}>
-                <InputLabel htmlFor="standard-adornment-password">Confirm Password</InputLabel>
+                <InputLabel htmlFor="standard-adornment-password-confirm">Confirm Password</InputLabel>
                 <Input
-                    id="standard-adornment-password"
-                    // type={values.showPassword ? 'text' : 'password'}
-                    // value={values.password}
-                    // onChange={handleChange('password')}
+                    id="standard-adornment-password-confirm"
+                    type={props.showConfirmPass ? 'text' : 'password'}
+                    value={props.confirmPass}
+                    onChange={(e) => props.changeConfirmPassword(e.target.value)}
                     endAdornment={
                     <InputAdornment position="end">
                         <IconButton
                         aria-label="toggle password visibility"
-                        //   onClick={handleClickShowPassword}
+                        onClick={() => props.showConfirmPassword()}
                         onMouseDown={handleMouseDownPassword}
                         >
-                        {/* {values.showPassword ? <Visibility /> : <VisibilityOff />} */}
+                        {props.showConfirmPass ? <Visibility /> : <VisibilityOff />}
                         </IconButton>
                     </InputAdornment>
                     }
@@ -119,4 +125,23 @@ function signup () {
 
 }
 
-export default signup;
+function msp (state) {
+    return {
+        name: state.auth.name,
+        username: state.auth.username,
+        password: state.auth.password,
+        confirmPass: state.auth.confirmPass,
+        showPass: state.auth.showPass,
+        showConfirmPass: state.auth.showConfirmPass
+    };
+}
+
+
+export default connect(msp,{
+    changeName,
+    changeUsername,
+    changePassword,
+    changeConfirmPassword,
+    showPassword,
+    showConfirmPassword
+})(signup);

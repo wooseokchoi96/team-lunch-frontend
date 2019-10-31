@@ -10,8 +10,24 @@ function changePassword (password) {
     return {type: 'CHANGE PASSWORD', payload: password}
 };
 
+function changeConfirmPassword (confirmPass) {
+    return {type: 'CHANGE CONFIRM PASSWORD', payload: confirmPass}
+};
+
+function showPassword () {
+    return {type: 'SHOW PASSWORD ?'}
+};
+
+function showConfirmPassword () {
+    return {type: 'SHOW CONFIRM PASSWORD ?'}
+};
+
+
 export {
     changeName,
     changeUsername,
-    changePassword
+    changePassword,
+    changeConfirmPassword,
+    showPassword,
+    showConfirmPassword
 };

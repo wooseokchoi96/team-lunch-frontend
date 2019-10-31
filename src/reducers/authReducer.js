@@ -2,7 +2,9 @@ const defaultState = {
     name: '',
     username: '',
     password: '',
-    showPass: false
+    confirmPass: '',
+    showPass: false,
+    showConfirmPass: false
 };
 
 function authReducer (state = defaultState, action) {
@@ -13,6 +15,12 @@ function authReducer (state = defaultState, action) {
             return {...state, username: action.payload} ;
         case 'CHANGE PASSWORD':
             return {...state, password: action.payload} ;
+        case 'CHANGE CONFIRM PASSWORD':
+            return {...state, confirmPass: action.payload} ;
+        case 'SHOW PASSWORD ?':
+            return {...state, showPass: !state.showPass} ;
+        case 'SHOW CONFIRM PASSWORD ?':
+            return {...state, showConfirmPass: !state.showConfirmPass} ;
         default:
             return state;
     }
