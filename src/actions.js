@@ -42,7 +42,7 @@ function createUser (userObj, props) {
                 alert(user.errors);
             } else {
                 dispatch(setCurrentUser(user));
-                props.history.push(`/userPage/${userObj.username}`);
+                props.history.push(`/users/${userObj.username}`);
             } 
         })
     }
@@ -64,7 +64,7 @@ function logInUser (userObj, props) {
                 alert(user.errors);
             } else {
                 dispatch(setCurrentUser(user));
-                props.history.push(`/userPage/${userObj.username}`);
+                props.history.push(`/users/${userObj.username}`);
             } 
         })
     }
