@@ -3,11 +3,11 @@ import {connect} from 'react-redux';
 import {logOut} from '../actions';
 
 function userPage (props) {
-
+    console.log('USER PAGE', props.currentUser)
     return(
         <div>
-            <h1>Welcome {props.currentUser.name} !!!</h1>
-            <button onClick={() => props.logOut(props)}>Log Out</button>
+            {props.currentUser ? <h1>Welcome {props.currentUser.name} !!!</h1> : null}
+            <button onClick={() => props.logOut(props.history)}>Log Out</button>
         </div>
     );
 

@@ -59,7 +59,7 @@ function signup (props) {
                 name: props.name,
                 username: props.username,
                 password: props.password
-            }, props);
+            }, props.history);
         } else {
             alert('Passwords Do Not Match');
         };  

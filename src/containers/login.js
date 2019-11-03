@@ -54,7 +54,7 @@ function login (props) {
         props.logInUser({
             username: props.username,
             password: props.password
-        },props); 
+        },props.history); 
     };
 
     return(

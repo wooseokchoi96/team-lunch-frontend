@@ -24,9 +24,9 @@ function showConfirmPassword () {
 
 function setCurrentUser (userObj) {
     return {type: 'SET CURRENT USER', payload: userObj};
-}
+};
 
-function createUser (userObj, props) {
+function createUser (userObj, history) {
     return function (dispatch) {
         fetch('http://localhost:3001/api/v1/signup', {
             method: 'POST',
@@ -41,14 +41,15 @@ function createUser (userObj, props) {
             if (user.errors) {
                 alert(user.errors);
             } else {
+                localStorage.user_id = user.id;
+                history.push(`/users/${user.username}`);
                 dispatch(setCurrentUser(user));
-                props.history.push(`/users/${userObj.username}`);
             } 
         })
-    }
-}
+    };
+};
 
-function logInUser (userObj, props) {
+function logInUser (userObj, history) {
     return function (dispatch) {
         fetch('http://localhost:3001/api/v1/login', {
             method: 'POST',
@@ -63,17 +64,37 @@ function logInUser (userObj, props) {
             if (user.errors) {
                 alert(user.errors);
             } else {
+                localStorage.user_id = user.id;
+                history.push(`/users/${user.username}`);
                 dispatch(setCurrentUser(user));
-                props.history.push(`/users/${userObj.username}`);
             } 
         })
-    }
-}
+    };
+};
 
-function logOut (props) {
-    props.history.push('/');
+function logOut (history) {
+    localStorage.removeItem('user_id');
+    history.push('/');
     return {type: 'LOGOUT'};
-}
+};
+
+function getUserInfo (user_id) {
+    return function (dispatch) {
+        fetch('http://localhost:3001/api/v1/auto_login', {
+            headers: {
+                'Authorization': user_id
+            }
+        })
+        .then(resp => resp.json())
+        .then(user => {
+            if (user.errors) {
+                alert(user.errors)
+            } else {
+                dispatch(setCurrentUser(user));
+            }
+        })
+    };
+};
 
 
 export {
@@ -85,5 +106,6 @@ export {
     showConfirmPassword,
     createUser,
     logInUser,
-    logOut
+    logOut,
+    getUserInfo
 };
