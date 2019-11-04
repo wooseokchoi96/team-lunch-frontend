@@ -37,13 +37,13 @@ function createUser (userObj, history) {
             body: JSON.stringify(userObj)
         })
         .then(resp => resp.json())
-        .then(user => {
-            if (user.errors) {
-                alert(user.errors);
+        .then(resp => {
+            if (resp.errors) {
+                alert(resp.errors);
             } else {
-                localStorage.user_id = user.id;
-                history.push(`/users/${user.username}`);
-                dispatch(setCurrentUser(user));
+                localStorage.token = resp.token;
+                history.push(`/users/${resp.user.username}`);
+                dispatch(setCurrentUser(resp.user));
             } 
         })
     };
@@ -60,29 +60,29 @@ function logInUser (userObj, history) {
             body: JSON.stringify(userObj)
         })
         .then(resp => resp.json())
-        .then(user => {
-            if (user.errors) {
-                alert(user.errors);
+        .then(resp => {
+            if (resp.errors) {
+                alert(resp.errors);
             } else {
-                localStorage.user_id = user.id;
-                history.push(`/users/${user.username}`);
-                dispatch(setCurrentUser(user));
+                localStorage.token = resp.token;
+                history.push(`/users/${resp.user.username}`);
+                dispatch(setCurrentUser(resp.user));
             } 
         })
     };
 };
 
 function logOut (history) {
-    localStorage.removeItem('user_id');
+    localStorage.removeItem('token');
     history.push('/');
     return {type: 'LOGOUT'};
 };
 
-function getUserInfo (user_id) {
+function getUserInfo (token) {
     return function (dispatch) {
         fetch('http://localhost:3001/api/v1/auto_login', {
             headers: {
-                'Authorization': user_id
+                'Authorization': token
             }
         })
         .then(resp => resp.json())

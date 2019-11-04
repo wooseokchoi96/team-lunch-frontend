@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {logOut} from '../actions';
 
 function userPage (props) {
-    console.log('USER PAGE', props.currentUser)
     return(
         <div>
             {props.currentUser ? <h1>Welcome {props.currentUser.name} !!!</h1> : null}

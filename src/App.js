@@ -9,14 +9,13 @@ import userPage from './containers/userPage';
 
 class App extends Component {
   componentDidMount(){
-    const user_id = localStorage.user_id;
-    if (user_id) {
-      this.props.getUserInfo(user_id);
+    const token = localStorage.token;
+    if (token) {
+      this.props.getUserInfo(token);
     } 
   }
   
   render(){
-  console.log("APP current user",this.props.state.auth.currentUser)
     return (
       <div>
         <h1>Hi, you will always see me!</h1>
