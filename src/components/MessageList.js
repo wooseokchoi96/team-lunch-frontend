@@ -5,7 +5,7 @@ function MessageList () {
 
     return(
         <div>
-            Message List Goes Here
+            <h1>Message List :</h1>
             <Message />
         </div>
 
