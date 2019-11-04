@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {getUserInfo} from './actions';
+import {getUserInfo} from './actions/AuthActions';
 import login from './containers/login';
 import signup from './containers/signup';
 import userPage from './containers/userPage';
+import Home from './containers/Home';
 
 
 class App extends Component {
@@ -18,9 +19,9 @@ class App extends Component {
   render(){
     return (
       <div>
-        <h1>Hi, you will always see me!</h1>
         <Router>
           <Switch>
+            <Route path='/' exact component={Home}/>
             <Route path='/login' component={login}/>
             <Route path='/signup' component={signup}/>
             <Route path='/users/:username' component={userPage}/>

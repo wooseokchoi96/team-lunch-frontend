@@ -5,7 +5,7 @@ import {
     changePassword,
     showPassword,
     logInUser
-    } from '../actions';
+    } from '../actions/AuthActions';
 
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
