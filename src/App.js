@@ -31,8 +31,4 @@ class App extends Component {
   }
 }
 
-function msp (state) {
-  return {state}
-}
-
-export default connect(msp,{getUserInfo})(App);
+export default connect(null,{getUserInfo})(App);
