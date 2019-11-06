@@ -1,11 +1,19 @@
 import React from 'react';
 import Message from './Message';
+import {connect} from 'react-redux';
 
-function MessageList () {
+function MessageList (props) {
 
     return(
         <div>
             <h1>Message List :</h1>
+            <ul>
+                {props.activeConversation ?
+                    props.activeConversation.messages.map(message => {
+                    return (<li key={message.id}>{message.user_id} : {message.text}</li>);
+                })
+                : null}
+            </ul>
             <Message />
         </div>
 
@@ -13,4 +21,11 @@ function MessageList () {
 
 };
 
-export default MessageList;
+function msp (state) {
+    return {
+        activeConversation: state.messenger.activeConversation
+    };
+};
+
+
+export default connect(msp)(MessageList);

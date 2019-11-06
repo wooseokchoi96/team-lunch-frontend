@@ -4,7 +4,7 @@ function Message () {
 
     return(
         <div>
-            Message 
+            Example Message 
         </div>
     );
 

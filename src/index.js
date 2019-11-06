@@ -7,11 +7,15 @@ import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import {createStore, applyMiddleware} from 'redux';
 import rootReducer from './reducers';
+import {ActionCableProvider} from 'react-actioncable-provider';
+import {API_WS_ROOT} from './config';
 
 const store = createStore(rootReducer,  applyMiddleware(thunk));
 
 ReactDOM.render(<Provider store={store}>
-                    <App />
+                    <ActionCableProvider url={API_WS_ROOT}>
+                        <App />
+                    </ActionCableProvider>
                 </Provider>, 
                 document.getElementById('root'));
 

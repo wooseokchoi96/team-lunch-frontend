@@ -1,3 +1,5 @@
+import {API_ROOT} from '../config';
+
 function changeName (name) {
     return {type: 'CHANGE NAME', payload: name}
 };
@@ -28,7 +30,7 @@ function setCurrentUser (userObj) {
 
 function createUser (userObj, history) {
     return function (dispatch) {
-        fetch('http://localhost:3001/api/v1/signup', {
+        fetch(`${API_ROOT}/signup`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -51,7 +53,7 @@ function createUser (userObj, history) {
 
 function logInUser (userObj, history) {
     return function (dispatch) {
-        fetch('http://localhost:3001/api/v1/login', {
+        fetch(`${API_ROOT}/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -80,7 +82,7 @@ function logOut (history) {
 
 function getUserInfo (token) {
     return function (dispatch) {
-        fetch('http://localhost:3001/api/v1/auto_login', {
+        fetch(`${API_ROOT}/auto_login`, {
             headers: {
                 'Authorization': token
             }
