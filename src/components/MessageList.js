@@ -23,7 +23,8 @@ function MessageList (props) {
 
 function msp (state) {
     return {
-        activeConversation: state.messenger.activeConversation
+        activeConversation: state.messenger.activeConversation,
+        conversations: state.messenger.conversations
     };
 };
 

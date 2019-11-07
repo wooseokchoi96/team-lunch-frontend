@@ -4,13 +4,16 @@ import { FormControl,
          Input,
          Button} from '@material-ui/core';
 import {connect} from 'react-redux';
-import {writeConvo, clearForms} from '../actions/MessengerActions';
+import {writeConvo,
+        clearForms,
+        postConvo} from '../actions/MessengerActions';
 
 function NewRoomForm (props) {
 
     const submitHandler = e => {
         e.preventDefault();
-        console.log('CREATING ROOM: ', props.newConvoName)
+        const convo = {title: props.newConvoName};
+        props.postConvo(convo);
         props.clearForms();
     };
 
@@ -40,5 +43,6 @@ function msp (state) {
 
 export default connect(msp,{
     writeConvo,
-    clearForms
+    clearForms,
+    postConvo
 })(NewRoomForm);

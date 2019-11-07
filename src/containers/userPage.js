@@ -36,14 +36,14 @@ class userPage extends Component {
             <div>
                 <ActionCableConsumer
                     channel={{ channel: 'ConversationsChannel' }}
-                    onReceived={() => this.handleReceivedConversation()}
+                    onReceived={this.handleReceivedConversation}
                 />
                 {this.props.conversations.map(conversation => {
                     return (
                     <ActionCableConsumer
                         key={conversation.id}  
                         channel={{ channel: 'MessagesChannel', conversation: conversation.id }}
-                        onReceived={() => this.handleReceivedMessage()}
+                        onReceived={this.handleReceivedMessage}
                     />
                     );
                 })}

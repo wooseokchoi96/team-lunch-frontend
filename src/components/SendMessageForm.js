@@ -4,13 +4,20 @@ import { FormControl,
          Input,
          Button} from '@material-ui/core';
 import {connect} from 'react-redux';
-import {writeMessage, clearForms} from '../actions/MessengerActions';
+import {writeMessage, 
+        clearForms,
+        postMessage} from '../actions/MessengerActions';
 
 function SendMessageForm (props) {
 
     const submitHandler = e => {
         e.preventDefault();
-        console.log('SENDING MESSAGE: ', props.newMessageText)
+        const message = {
+            text: props.newMessageText,
+            conversation_id: props.activeConversation.id,
+            user_id: props.currentUser.id
+        };
+        props.postMessage(message);
         props.clearForms();
     };
 
@@ -34,11 +41,14 @@ function SendMessageForm (props) {
 
 function msp (state) {
     return {
-        newMessageText: state.messenger.newMessageText
+        newMessageText: state.messenger.newMessageText,
+        activeConversation: state.messenger.activeConversation,
+        currentUser: state.auth.currentUser
     };
 };
 
 export default connect(msp,{
     writeMessage,
-    clearForms
+    clearForms,
+    postMessage
 })(SendMessageForm);

@@ -10,6 +10,32 @@ function getAllConvos () {
     };
 };
 
+function postConvo (convo) {
+    return function () {
+        fetch(`${API_ROOT}/conversations`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(convo)
+        });
+    };
+};
+
+function postMessage (message) {
+    return function () {
+        fetch(`${API_ROOT}/messages`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(message)
+        });
+    };
+};
+
 function setActiveConversation (convo) {
     return {type: 'SET ACTIVE CONVO', payload: convo};
 };
@@ -36,6 +62,8 @@ function clearForms () {
 
 export {
     getAllConvos,
+    postConvo,
+    postMessage,
     setActiveConversation,
     addConvo,
     addMessage,
