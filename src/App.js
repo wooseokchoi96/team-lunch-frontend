@@ -5,6 +5,7 @@ import {getUserInfo} from './actions/AuthActions';
 import login from './containers/login';
 import signup from './containers/signup';
 import userPage from './containers/userPage';
+import userSettings from './containers/userSettings';
 import Home from './containers/Home';
 import { Link } from 'react-router-dom';
 
@@ -13,8 +14,8 @@ import Grid from '@material-ui/core/Grid';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import HomeIcon from '@material-ui/icons/Home';
+import MenuList from './Material-UI/MenuList';
 
 
 class App extends Component {
@@ -38,19 +39,17 @@ class App extends Component {
                 container 
                 spacing={2}
               >
-                <IconButton edge="start" className={classes.homeButton} color="inherit" aria-label="home">
+                <Button className={classes.navButton} color="inherit" aria-label="home">
                   <Link style={{color: 'white'}} to='/'><HomeIcon /></Link>
-                </IconButton>
+                </Button>
                 <Grid item>
                   {this.props.currentUser ? 
-                  <>
-                    <Button color="inherit"><Link style={{textDecoration: 'none', color: 'white'}} to={`/users/${this.props.currentUser.username}`}>Profile</Link></Button>
-                  </>
-                  :
-                  <>
-                    <Button color="inherit"><Link style={{textDecoration: 'none', color: 'white'}} to='/login'>Log In</Link></Button>
-                    <Button color="inherit"><Link style={{textDecoration: 'none', color: 'white'}} to='/signup'>Sign Up</Link></Button>
-                  </>}
+                    <MenuList />
+                    :
+                    <>
+                      <Button color="inherit"><Link style={{textDecoration: 'none', color: 'white'}} to='/login'>Log In</Link></Button>
+                      <Button color="inherit"><Link style={{textDecoration: 'none', color: 'white'}} to='/signup'>Sign Up</Link></Button>
+                    </>}
                 </Grid>
               </Grid>
             </Toolbar>
@@ -61,7 +60,8 @@ class App extends Component {
             <Route path='/' exact component={Home}/>
             <Route path='/login' component={login}/>
             <Route path='/signup' component={signup}/>
-            <Route path='/users/:username' component={userPage}/>
+            <Route path='/users/:username' exact component={userPage}/>
+            <Route path='/users/:username/settings' component={userSettings}/>
           </Switch>
 
         </Router>
@@ -74,7 +74,7 @@ const classes = makeStyles(theme => ({
   root: {
     flexGrow: 1
   },
-  homeButton: {
+  navButton: {
     marginRight: theme.spacing(2),
   }
 }));

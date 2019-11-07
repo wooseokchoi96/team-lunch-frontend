@@ -7,7 +7,6 @@ import {connect} from 'react-redux';
 import {logOut} from '../actions/AuthActions';
 import {getAllConvos, addConvo, addMessage} from '../actions/MessengerActions';
 import { ActionCableConsumer } from 'react-actioncable-provider';
-import {Button} from '@material-ui/core';
 
 
 class userPage extends Component {
@@ -53,10 +52,6 @@ class userPage extends Component {
                 <MessageList />
                 <NewRoomForm />
                 <SendMessageForm />
-                <br/><br/>
-                <Button onClick={() => this.props.logOut(this.props.history)} variant="outlined" color="primary">
-                    Log Out
-                </Button>
             </div>
         );
     }

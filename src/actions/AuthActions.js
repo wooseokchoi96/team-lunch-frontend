@@ -74,9 +74,8 @@ function logInUser (userObj, history) {
     };
 };
 
-function logOut (history) {
+function logOut () {
     localStorage.removeItem('token');
-    history.push('/');
     return {type: 'LOGOUT'};
 };
 
