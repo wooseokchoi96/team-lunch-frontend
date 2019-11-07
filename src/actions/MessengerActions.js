@@ -14,7 +14,32 @@ function setActiveConversation (convo) {
     return {type: 'SET ACTIVE CONVO', payload: convo};
 };
 
+function addConvo (convo) {
+    return {type: 'ADD CONVO', payload: convo};
+};
+
+function addMessage (conversations) {
+    return {type: 'ADD MESSAGE', payload: conversations};
+};
+
+function writeConvo (convoName) {
+    return {type: 'WRITE CONVO', payload: convoName}
+};
+
+function writeMessage (message) {
+    return {type: 'WRITE MESSAGE', payload: message}
+};
+
+function clearForms () {
+    return {type: 'CLEAR FORMS'}
+}
+
 export {
     getAllConvos,
-    setActiveConversation
+    setActiveConversation,
+    addConvo,
+    addMessage,
+    writeConvo,
+    writeMessage,
+    clearForms
 };

@@ -5,8 +5,9 @@ import RoomList from '../components/RoomList';
 import SendMessageForm from '../components/SendMessageForm';
 import {connect} from 'react-redux';
 import {logOut} from '../actions/AuthActions';
-import {getAllConvos} from '../actions/MessengerActions';
-import { ActionCable } from 'react-actioncable-provider';
+import {getAllConvos, addConvo, addMessage} from '../actions/MessengerActions';
+import { ActionCableConsumer } from 'react-actioncable-provider';
+import {Button} from '@material-ui/core';
 
 
 class userPage extends Component {
@@ -15,27 +16,34 @@ class userPage extends Component {
         this.props.getAllConvos();
     }
 
-    handleReceivedConversation = () => {
-
+    handleReceivedConversation = response => {
+        const { conversation } = response;
+        this.props.addConvo(conversation);
     };
 
-    handleReceivedMessage = () => {
-
+    handleReceivedMessage = response => {
+        const { message } = response;
+        const conversations = [...this.props.conversations];
+        const conversation = conversations.find(
+            conversation => conversation.id === message.conversation_id
+        );
+        conversation.messages = [...conversation.messages, message];
+        this.props.addMessage(conversations);
     };
 
     render(){
         return(
             <div>
-                <ActionCable
+                <ActionCableConsumer
                     channel={{ channel: 'ConversationsChannel' }}
-                    onReceived={this.handleReceivedConversation()}
+                    onReceived={() => this.handleReceivedConversation()}
                 />
                 {this.props.conversations.map(conversation => {
                     return (
-                    <ActionCable
+                    <ActionCableConsumer
                         key={conversation.id}  
                         channel={{ channel: 'MessagesChannel', conversation: conversation.id }}
-                        onReceived={this.handleReceivedMessage()}
+                        onReceived={() => this.handleReceivedMessage()}
                     />
                     );
                 })}
@@ -45,8 +53,10 @@ class userPage extends Component {
                 <MessageList />
                 <NewRoomForm />
                 <SendMessageForm />
-                <button onClick={() => this.props.logOut(this.props.history)}>Log Out</button>
-                
+                <br/><br/>
+                <Button onClick={() => this.props.logOut(this.props.history)} variant="outlined" color="primary">
+                    Log Out
+                </Button>
             </div>
         );
     }
@@ -61,5 +71,7 @@ function msp (state) {
 
 export default connect(msp,{
     logOut,
-    getAllConvos
+    getAllConvos,
+    addConvo,
+    addMessage
 })(userPage);
