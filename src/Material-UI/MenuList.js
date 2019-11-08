@@ -61,7 +61,7 @@ function MenuListComposition(props) {
         onClick={handleToggle}
         style={{color: 'white'}}
       >
-        <AccountCircleIcon />
+        <AccountCircleIcon/>
       </Button>
       <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
         {({ TransitionProps, placement }) => (
@@ -72,7 +72,7 @@ function MenuListComposition(props) {
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
-                  <MenuItem onClick={handleClose}><Link style={{textDecoration: 'none', color: 'black'}} to={`/users/${props.currentUser.username}`}>Profile</Link></MenuItem>
+                  <MenuItem onClick={handleClose}><Link style={{textDecoration: 'none', color: 'black'}} to={`/users/${props.currentUser.username}`}>Messages</Link></MenuItem>
                   <MenuItem onClick={handleClose}><Link style={{textDecoration: 'none', color: 'black'}} to={`/users/${props.currentUser.username}/settings`}>My Account</Link></MenuItem>
                   <MenuItem onClick={e => {handleClose(e); props.logOut();}}><Link style={{textDecoration: 'none', color: 'black'}} to='/'>Log Out</Link></MenuItem>
                 </MenuList>

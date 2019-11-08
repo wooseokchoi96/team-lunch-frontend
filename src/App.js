@@ -28,11 +28,11 @@ class App extends Component {
 
   render(){
     return (
-      <div>
+      <>
         <Router>
 
-        <div className={classes.root}>
-          <AppBar style={{ backgroundColor: '#78909c' }} position="static">
+        {/* <div > */}
+          <AppBar id='appbar' className={classes.root} style={{ backgroundColor: '#78909c'}} position="static">
             <Toolbar>
               <Grid
                 justify="space-between"
@@ -40,7 +40,7 @@ class App extends Component {
                 spacing={2}
               >
                 <Button className={classes.navButton} color="inherit" aria-label="home">
-                  <Link style={{color: 'white'}} to='/'><HomeIcon /></Link>
+                  <Link style={{color: 'white'}} to='/'><HomeIcon/></Link>
                 </Button>
                 <Grid item>
                   {this.props.currentUser ? 
@@ -54,8 +54,9 @@ class App extends Component {
               </Grid>
             </Toolbar>
           </AppBar>
-        </div>
+        {/* </div> */}
 
+        <div id='restofapp'>
           <Switch>
             <Route path='/' exact component={Home}/>
             <Route path='/login' component={login}/>
@@ -63,9 +64,11 @@ class App extends Component {
             <Route path='/users/:username' exact component={userPage}/>
             <Route path='/users/:username/settings' component={userSettings}/>
           </Switch>
+        </div>
 
         </Router>
-      </div>
+
+      </>
     );
   }
 }
