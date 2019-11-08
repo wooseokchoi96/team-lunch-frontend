@@ -5,11 +5,17 @@ import { setActiveConversation } from '../actions/MessengerActions';
 function RoomList (props) {
 
     return(
-        <div>
-            <h1>Room List</h1>
+        <div className='Room-List'>
             <ul>
+                <h3>Your Rooms: </h3>
                 {props.conversations.map(conversation => {
-                    return <li onClick={() => props.setActiveConversation(conversation)} key={conversation.id}>{conversation.title}</li>
+                    let active;
+                    (props.activeConversation ? 
+                        active = conversation.id === props.activeConversation.id ? 'active' : ''
+                    : active = '');
+                    return  <li className={"room " + active} onClick={() => props.setActiveConversation(conversation)} key={conversation.id}>
+                                # {conversation.title}
+                            </li>
                 })}
             </ul>
         </div>
@@ -20,7 +26,8 @@ function RoomList (props) {
 
 function msp (state) {
     return {
-        conversations: state.messenger.conversations
+        conversations: state.messenger.conversations,
+        activeConversation: state.messenger.activeConversation
     }
 } 
 

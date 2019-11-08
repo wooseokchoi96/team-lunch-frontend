@@ -11,3 +11,126 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+#root {
+  height: 100%;
+}
+
+:root {
+    --main-color: #cfd8dc;
+    --secondary-color: #1565c0;
+    --main-text-color: #3e5869;
+    --secondary-text-color: white;
+    --send-message-form: #F5F5F5;
+    --room-form: whitesmoke;
+}
+
+.User-Page {
+  display: grid;
+  height: 100%;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 50px;
+  grid-template-areas: 
+    'r m m m m m'
+    'r m m m m m'
+    'r m m m m m'
+    'r m m m m m'
+    'r m m m m m'
+    'n f f f f f';
+}
+
+.Room-List {
+  grid-area: r;
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: var(--main-color);
+  overflow: scroll;
+  height: 100%;
+}
+
+.Room-List ul {
+    list-style-type: none;    
+    padding: 0;
+    overflow: scroll;
+}
+
+.Room-List li {
+    margin: 10px 0;
+}
+
+.Room-List h3 {
+    margin: 5px 0;
+    color: var(--secondary-color);
+}
+
+.Room-List .room {
+    color: var(--secondary-text-color);
+    font-weight: 600;
+    text-decoration: none;
+ }
+
+ .Room-List .room.active {
+    color: var(--secondary-color);
+}
+
+.Message-List {
+  grid-area: m;
+}
+
+.Room-Form {
+  grid-area: n;
+  padding: 0 5px;
+  background: var(--room-form);
+  color: var(--main-text-color);
+}
+
+.Room-Form form {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Room-Form input {
+    width: 135px;
+    background: var(--room-form);
+    border: 0;
+}
+
+.Room-Form button {
+    background: var(--room-form);
+    color: var(--main-text-color);
+    border: 0;
+} 
+
+.Room-Form input::placeholder {
+    color: var(--main-text-color);
+    font-weight: 200;
+}
+
+.Room-Form input:focus {
+    outline-width: 0;
+}
+
+.Message-Form {
+  grid-area: f;
+  background: var(--send-message-form);
+  display: flex;
+}
+
+.Message-Form input {
+    width: 100%;
+    padding: 15px 10px;
+    margin: 0;
+    border-style: none;
+    background: var(--send-message-form);
+    font-weight: 200;
+}
+
+.Message-Form input:focus {
+    outline-width: 0;
+}
+
+.Message-Form input::placeholder {
+    color: var(--main-text-color);
+}

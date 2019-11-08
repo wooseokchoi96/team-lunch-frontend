@@ -32,7 +32,7 @@ class userPage extends Component {
 
     render(){
         return(
-            <div>
+            <div className='User-Page'>
                 <ActionCableConsumer
                     channel={{ channel: 'ConversationsChannel' }}
                     onReceived={this.handleReceivedConversation}
@@ -47,7 +47,6 @@ class userPage extends Component {
                     );
                 })}
 
-                {this.props.currentUser ? <h1>Welcome {this.props.currentUser.name} !!!</h1> : null}
                 <RoomList />
                 <MessageList />
                 <NewRoomForm />

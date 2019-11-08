@@ -5,8 +5,7 @@ import {connect} from 'react-redux';
 function MessageList (props) {
 
     return(
-        <div>
-            <h1>Message List :</h1>
+        <div className='Message-List'>
             <ul>
                 {props.activeConversation ?
                     props.activeConversation.messages.map(message => {

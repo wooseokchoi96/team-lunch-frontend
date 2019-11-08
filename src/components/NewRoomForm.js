@@ -1,8 +1,4 @@
 import React from 'react';
-import { FormControl,
-         InputLabel,
-         Input,
-         Button} from '@material-ui/core';
 import {connect} from 'react-redux';
 import {writeConvo,
         clearForms,
@@ -18,16 +14,16 @@ function NewRoomForm (props) {
     };
 
     return(
-        <div>
-            <h1>New Room Form Goes Here</h1>
+        <div className='Room-Form'>
             <form onSubmit={e => submitHandler(e)}> 
-                <FormControl>
-                    <InputLabel htmlFor="new-convo">Create New Chatroom</InputLabel>
-                    <Input id="new-convo" aria-describedby="my-helper-text" placeholder='Enter Room Name' value={props.newConvoName} onChange={e => props.writeConvo(e.target.value)} />
-                    <Button type='submit' variant="outlined" color="primary" size='small'>
-                        Create 
-                    </Button>
-                </FormControl>
+                <input 
+                    type='text'
+                    placeholder='Create a Room' 
+                    value={props.newConvoName} 
+                    onChange={e => props.writeConvo(e.target.value)} 
+                    required
+                /> 
+                <button id="create-room-btn" type="submit">+</button>
             </form>
         </div>
 
