@@ -8,7 +8,6 @@ import {logOut} from '../actions/AuthActions';
 import {getAllConvos, addConvo, addMessage} from '../actions/MessengerActions';
 import { ActionCableConsumer } from 'react-actioncable-provider';
 
-
 class userPage extends Component {
 
     componentDidMount(){
