@@ -1,14 +1,23 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
-function Message ({message}) {
+function Message ({message, currentUser}) {
+
+    const messageType = message.user_id === currentUser.id ? 'myMessage' : 'message' ;
 
     return(
-        <div className='message'>
-            <div className="message-username">{message.user_id}</div>
-            <div className="message-text">{message.text}</div>
+        <div className={messageType}>
+            <div className={messageType + "-username"}>{message.user_name}</div>
+            <div className={messageType + "-text"}>{message.text}</div>
         </div>
     );
 
 };
 
-export default Message;
+function msp (state) {
+    return {
+        currentUser: state.auth.currentUser
+    };
+};
+
+export default connect(msp)(Message);

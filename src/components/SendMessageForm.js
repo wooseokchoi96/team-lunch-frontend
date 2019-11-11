@@ -11,7 +11,8 @@ function SendMessageForm (props) {
         const message = {
             text: props.newMessageText,
             conversation_id: props.activeConversation.id,
-            user_id: props.currentUser.id
+            user_id: props.currentUser.id,
+            user_name: props.currentUser.name
         };
         props.postMessage(message);
         props.clearForms();
