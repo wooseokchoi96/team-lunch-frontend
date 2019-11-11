@@ -131,6 +131,10 @@ code {
     display: inline;
 }
 
+.timestamp {
+  font-size: 12px;
+}
+
 .myMessage-text {
     box-decoration-break: clone;
     padding: 1px 4px;
