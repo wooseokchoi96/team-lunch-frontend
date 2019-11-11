@@ -66,9 +66,7 @@ function signup (props) {
     };
 
     return(
-        <div>
-            <h1> Sign Up Page</h1>
-
+        <div className='auth'>
             <form onSubmit={e => submitHandler(e)}>
             <FormControl className={clsx(classes.margin, classes.textField)}>
                 <InputLabel htmlFor="standard-start-name">Name</InputLabel>
