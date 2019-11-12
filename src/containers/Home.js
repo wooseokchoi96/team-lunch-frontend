@@ -1,34 +1,67 @@
-import React from 'react';
-import {connect} from 'react';
-import {getAllCuisineTypes} from '../actions/RestaurantActions';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {getAllCuisineTypes, setLat, setLon} from '../actions/RestaurantActions';
+import SearchBar from '../components/SearchBar';
+import SearchResults from '../components/SearchResults';
 
-function Home (props) {
+class Home extends Component {
 
-    const coords = getLocation();
-    const lat = coords.latitude;
-    const lon = coords.longitude;
-    props.getAllCuisineTypes(lat, lon);
-
-    return(
-        <div>
-            <h1>Home Page</h1>
-        </div>
-    );
-
-};
-
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        alert("Geolocation is not supported by this browser.");
+    componentDidMount(){
+        this.getLocation();
     }
+
+    render(){
+        if (this.props.lat && this.props.lon) {
+            this.props.getAllCuisineTypes(this.props.lat, this.props.lon);
+        }
+        console.log('results', this.props.results)
+        return(
+            <div>
+                <SearchBar />
+                <SearchResults />
+            </div>
+        );
+    }
+
+    getLocation = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(this.success, this.error, this.options);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    };
+
+    options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+    };
+
+    success = (pos) => {
+        const coords = pos.coords;
+        const lat = coords.latitude;
+        const lon = coords.longitude;
+        console.log('lat', lat)
+        console.log('lon', lon)
+        this.props.setLat(lat);
+        this.props.setLon(lon);
+    };
+
+    error = (err) => {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+    };
 };
 
-function showPosition(position) {
-    return position.coords;
+function msp (state) {
+    return {
+        lat: state.restaurant.lat,
+        lon: state.restaurant.lon,
+        results: state.restaurant.results
+    };
 };
 
-export default connect(null,{
-    getAllCuisineTypes
+export default connect(msp,{
+    getAllCuisineTypes,
+    setLat,
+    setLon
 })(Home);
