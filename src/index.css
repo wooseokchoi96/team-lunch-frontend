@@ -286,16 +286,14 @@ code {
 }
 
 .home-img {
-  background-image: url('food-back-1.jpg');
   background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
   position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  height: 100%;
-  width: auto;
   z-index: -1; 
   opacity: 80%;
 }
@@ -307,5 +305,21 @@ code {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 15px;
-  top: 530px;
+  top: 480px;
 }
+
+.RestaurantPage {
+  /* display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    'l r'; */
+} 
+
+.Carousel {
+}
+
+.CarImg {
+  height: 300px;
+}
+

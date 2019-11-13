@@ -1,43 +1,31 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getAllCuisineTypes, setLat, setLon} from '../actions/RestaurantActions';
+import {getAllCuisineTypes, setLat, setLon, getPhotos, getBackground} from '../actions/RestaurantActions';
 import SearchBar from '../components/SearchBar';
 import SearchResults from '../components/SearchResults';
 import ResultCard from '../components/ResultsCard';
 
 class Home extends Component {
 
-    componentDidMount(){
-        this.getLocation();
-    }
+    componentDidMount() {
+        this.getLocation()
+        this.props.getPhotos()
+        this.props.getBackground()
+    };
 
     render(){
         if (this.props.lat && this.props.lon) {
             this.props.getAllCuisineTypes(this.props.lat, this.props.lon);
         }
-        console.log('results', this.props.results)
+        let Background = this.props.background[0];
         return(
             <div className='home'>
-                <div className='home-img'></div>
+                <div 
+                    className='home-img'
+                    style={{backgroundImage: `url(${Background})`}}
+                ></div>
                 <SearchBar />
                 <SearchResults />
-                {/* <div 
-                    class="widget_wrap" 
-                    style={{width:'320px',
-                            height:'797px',
-                            display:'inline-block'}}
-                >
-                    <iframe 
-                            title='Restaurant Collections'
-                            src="https://www.zomato.com/widgets/all_collections.php?city_id=280&theme=gray&widgetType=small" 
-                            style={{position:'relative',
-                                    width:'100%',
-                                    height:'100%'}} 
-                            border="0" 
-                            frameborder="0"
-                    >
-                    </iframe>
-                </div> */}
                 {this.props.results.restaurants ? 
                 this.showResults()
                 : null}
@@ -46,12 +34,21 @@ class Home extends Component {
     }
 
     showResults = () => {
-        console.log('printing the result cards')
+        console.log(this.props.results.restaurants)
         return this.props.results.restaurants.map(restObj => {
+                    let rand = this.props.photos[Math.floor(Math.random() * this.props.photos.length)];
                     return <ResultCard 
+                        history={this.props.history}
                         key={restObj.restaurant.id}
+                        object={restObj}
                         name={restObj.restaurant.name}
-                        img={restObj.restaurant.featured_img}
+                        img={rand}
+                        rating={restObj.restaurant.user_rating.aggregate_rating === 0 ?
+                                restObj.restaurant.user_rating.rating_text :
+                                restObj.restaurant.user_rating.aggregate_rating}
+                        price={restObj.restaurant.currency}
+                        location={restObj.restaurant.location.address + ' (' + restObj.restaurant.location.locality + ')'}
+                        phone={restObj.restaurant.phone_numbers}
                     />
                 })
     };
@@ -87,12 +84,16 @@ function msp (state) {
     return {
         lat: state.restaurant.lat,
         lon: state.restaurant.lon,
-        results: state.restaurant.results
+        results: state.restaurant.results,
+        photos: state.restaurant.photos,
+        background: state.restaurant.background
     };
 };
 
 export default connect(msp,{
     getAllCuisineTypes,
     setLat,
-    setLon
+    setLon,
+    getPhotos,
+    getBackground
 })(Home);

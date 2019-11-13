@@ -6,6 +6,7 @@ import login from './containers/login';
 import signup from './containers/signup';
 import userPage from './containers/userPage';
 import userSettings from './containers/userSettings';
+import restaurantPage from './containers/restaurantPage';
 import Home from './containers/Home';
 import { Link } from 'react-router-dom';
 
@@ -31,30 +32,28 @@ class App extends Component {
       <>
         <Router>
 
-        {/* <div > */}
-          <AppBar id='appbar' className={classes.root} style={{ backgroundColor: '#78909c'}} position="static">
-            <Toolbar>
-              <Grid
-                justify="space-between"
-                container 
-                spacing={2}
-              >
-                <Button className={classes.navButton} color="inherit" aria-label="home">
-                  <Link style={{color: 'white'}} to='/'><HomeIcon/></Link>
-                </Button>
-                <Grid item>
-                  {this.props.currentUser ? 
-                    <MenuList />
-                    :
-                    <>
-                      <Button color="inherit"><Link style={{textDecoration: 'none', color: 'white'}} to='/login'>Log In</Link></Button>
-                      <Button color="inherit"><Link style={{textDecoration: 'none', color: 'white'}} to='/signup'>Sign Up</Link></Button>
-                    </>}
-                </Grid>
+        <AppBar id='appbar' className={classes.root} style={{ backgroundColor: '#78909c'}} position="static">
+          <Toolbar>
+            <Grid
+              justify="space-between"
+              container 
+              spacing={2}
+            >
+              <Button className={classes.navButton} color="inherit" aria-label="home">
+                <Link style={{color: 'white'}} to='/'><HomeIcon/></Link>
+              </Button>
+              <Grid item>
+                {this.props.currentUser ? 
+                  <MenuList />
+                  :
+                  <>
+                    <Button color="inherit"><Link style={{textDecoration: 'none', color: 'white'}} to='/login'>Log In</Link></Button>
+                    <Button color="inherit"><Link style={{textDecoration: 'none', color: 'white'}} to='/signup'>Sign Up</Link></Button>
+                  </>}
               </Grid>
-            </Toolbar>
-          </AppBar>
-        {/* </div> */}
+            </Grid>
+          </Toolbar>
+        </AppBar>
 
         <div id='restofapp'>
           <Switch>
@@ -63,6 +62,7 @@ class App extends Component {
             <Route path='/signup' component={signup}/>
             <Route path='/users/:username' exact component={userPage}/>
             <Route path='/users/:username/settings' component={userSettings}/>
+            <Route path='/restaurants/:restaurant_name' component={restaurantPage}/>
           </Switch>
         </div>
 

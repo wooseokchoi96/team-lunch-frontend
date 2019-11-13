@@ -1,4 +1,8 @@
-import {API_KEY} from '../config';
+import {API_KEY, PHOTO_KEY} from '../config';
+import Unsplash from 'unsplash-js';
+const unsplash = new Unsplash({
+  accessKey: PHOTO_KEY
+});
 const API_URL = 'https://developers.zomato.com/api/v2.1';
 
 function getAllCuisineTypes (lat, lon) {
@@ -59,6 +63,38 @@ function setOrder (order) {
     return {type: 'SET ORDER', payload: order};
 };
 
+function getPhotos () {
+    let page = Math.floor(Math.random() * 300)  
+    return function (dispatch) {
+        unsplash.search.photos("food", page, 30, { orientation: "portrait" })
+        .then(resp => resp.json())
+        .then(photos => {
+            let allPhotos = photos.results.map(photo => {
+                return photo.urls.regular;
+            })
+        dispatch({type: 'GET PHOTOS', payload: allPhotos});
+        });
+    };
+}
+
+function getBackground () {
+    let page = Math.floor(Math.random() * 300);
+    return function (dispatch) {
+        unsplash.search.photos("food", page, 1, { orientation: "portrait" })
+        .then(resp => resp.json())
+        .then(photos => {
+            let allPhotos = photos.results.map(photo => {
+                return photo.urls.full;
+            })
+        dispatch({type: 'GET BACKGROUND', payload: allPhotos});
+        });
+    };
+};
+
+function setRestaurant (restaurant) {
+    return {type: 'SET RESTAURANT', payload: restaurant};
+}
+
 export {
     getAllCuisineTypes,
     searching,
@@ -67,5 +103,8 @@ export {
     setLat,
     setLon,
     setSort,
-    setOrder
+    setOrder,
+    getPhotos,
+    getBackground,
+    setRestaurant
 };
