@@ -212,9 +212,13 @@ code {
 }
 
 .search {
+  display: block;
+  position: relative;
+  top: 180px;
   width: 500px;
   height: 40px;
-  margin: 150px 0 0 150px ;
+  margin-left: auto;
+  margin-right: auto;
   background: var(--main-color);
   border-radius: 3px;
   border: 1px solid #fff;}
@@ -255,10 +259,53 @@ code {
 
 .search button:focus {outline: 0;}
 
+.SearchResults {
+  position: relative;
+  padding: 5px 16px;
+  width: 470px;
+  background: whitesmoke;
+  top: 180px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .SearchResults ul {
   list-style-type: none;
+  font-size: 12px;
 }
 
 .SearchResults li:hover {
   color: var(--secondary-color);
+}
+
+.home {
+  width: auto;
+  height: 80%;
+  display: block;
+  position: relative;
+}
+
+.home-img {
+  background-image: url('food-back-1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: auto;
+  z-index: -1; 
+  opacity: 80%;
+}
+
+.ResultCard {
+  position: relative;
+  max-width: 500px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15px;
+  top: 530px;
 }

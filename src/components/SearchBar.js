@@ -15,7 +15,7 @@ function SearchBar (props) {
         >
             <input 
                 type="search" 
-                placeholder="Search for cuisine ..." 
+                placeholder="Find something to eat ..." 
                 value={props.searchTerm}
                 onChange={(e) => props.searching(e.target.value)}
                 required
