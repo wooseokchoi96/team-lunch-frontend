@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import Paper from '@material-ui/core/Paper';
 
 class restaurantPage extends Component {
 
@@ -36,6 +37,8 @@ class restaurantPage extends Component {
     };
 
     render() {
+        const res = this.props.activeRestaurant;
+        const times = res.timings.split(',');
         return (
             <div className='RestaurantPage'>
                 <div className='Carousel'>
@@ -63,6 +66,30 @@ class restaurantPage extends Component {
                         })}
                     </div>
                 </div>
+
+                <Paper className='RestaurantDetails'>
+                    <h1>{res.name}</h1>
+                    <h5>Rating: {res.user_rating.aggregate_rating === 0 ?
+                        res.user_rating.rating_text :
+                        res.user_rating.aggregate_rating}</h5>
+                    <h5>Price: {res.currency}</h5>  
+                    <h5>Type: {res.cuisines}</h5>  
+                    <h5>&#9742; {res.phone_numbers}</h5>
+                    <h5>
+                        Location: {res.location.address} <br />
+                        ({res.location.locality}, {res.location.city})
+                    </h5>
+                    <h5> Hours: 
+                        {res.timings !== '' ?
+                            <ul style={{listStyleType:'none'}}>
+                                {times.map((time, index) => {
+                                    return <li key={index} >{time}</li>
+                                })}
+                            </ul>
+                        : ' Not available'
+                        }
+                    </h5>
+                </Paper>
             </div>
         );
     }
@@ -72,7 +99,7 @@ class restaurantPage extends Component {
 function msp (state) {
     return {
         photos: state.restaurant.photos,
-        activeRestaurant: state.restaurant.activeRestaurant
+        activeRestaurant: state.restaurant.activeRestaurant.restaurant
     };
 };
 

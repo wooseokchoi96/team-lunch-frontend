@@ -314,6 +314,18 @@ code {
   grid-template-areas: 'l r';
 } 
 
+.RestaurantDetails {
+  grid-area: l;
+  position: relative;
+  padding: 5px 16px;
+  width: 90%;
+  background: whitesmoke;
+  top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
 .Carousel {
   grid-area: r;
 }

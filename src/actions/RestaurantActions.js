@@ -1,7 +1,11 @@
 import {API_KEY, PHOTO_KEY} from '../config';
 import Unsplash from 'unsplash-js';
 const unsplash = new Unsplash({
-  accessKey: PHOTO_KEY
+  accessKey: PHOTO_KEY,
+  headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+  }
 });
 const API_URL = 'https://developers.zomato.com/api/v2.1';
 
@@ -64,7 +68,7 @@ function setOrder (order) {
 };
 
 function getPhotos () {
-    let page = Math.floor(Math.random() * 300)  
+    let page = Math.floor(Math.random() * 100)  
     return function (dispatch) {
         unsplash.search.photos("food", page, 30, { orientation: "portrait" })
         .then(resp => resp.json())
@@ -78,7 +82,7 @@ function getPhotos () {
 }
 
 function getBackground () {
-    let page = Math.floor(Math.random() * 300);
+    let page = Math.floor(Math.random() * 100);
     return function (dispatch) {
         unsplash.search.photos("food", page, 1, { orientation: "portrait" })
         .then(resp => resp.json())
