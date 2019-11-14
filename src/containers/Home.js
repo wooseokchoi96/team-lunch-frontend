@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getAllCuisineTypes, setLat, setLon, getPhotos, getBackground} from '../actions/RestaurantActions';
+import {getAllCuisineTypes, setLat, setLon, getPhotos, getBackground, clear} from '../actions/RestaurantActions';
 import SearchBar from '../components/SearchBar';
 import SearchResults from '../components/SearchResults';
-import ResultCard from '../components/ResultsCard';
+
 
 class Home extends Component {
 
     componentDidMount() {
         this.getLocation()
+        this.props.clear()
         this.props.getBackground()
         this.props.getPhotos()
     };
@@ -24,34 +25,11 @@ class Home extends Component {
                     className='home-img'
                     style={{backgroundImage: `url(${Background})`}}
                 ></div>
-                <SearchBar />
+                <SearchBar history={this.props.history}/>
                 <SearchResults />
-                {this.props.results.restaurants ? 
-                this.showResults()
-                : null}
             </div>
         );
     }
-
-    showResults = () => {
-        console.log(this.props.results.restaurants)
-        return this.props.results.restaurants.map(restObj => {
-                    let rand = this.props.photos[Math.floor(Math.random() * this.props.photos.length)];
-                    return <ResultCard 
-                        history={this.props.history}
-                        key={restObj.restaurant.id}
-                        object={restObj}
-                        name={restObj.restaurant.name}
-                        img={rand}
-                        rating={restObj.restaurant.user_rating.aggregate_rating === 0 ?
-                                restObj.restaurant.user_rating.rating_text :
-                                restObj.restaurant.user_rating.aggregate_rating}
-                        price={restObj.restaurant.currency}
-                        location={restObj.restaurant.location.address + ' (' + restObj.restaurant.location.locality + ')'}
-                        phone={restObj.restaurant.phone_numbers}
-                    />
-                })
-    };
 
     getLocation = () => {
         if (navigator.geolocation) {
@@ -95,5 +73,6 @@ export default connect(msp,{
     setLat,
     setLon,
     getPhotos,
-    getBackground
+    getBackground,
+    clear
 })(Home);

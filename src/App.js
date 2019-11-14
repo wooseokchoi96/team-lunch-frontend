@@ -7,6 +7,7 @@ import signup from './containers/signup';
 import userPage from './containers/userPage';
 import userSettings from './containers/userSettings';
 import restaurantPage from './containers/restaurantPage';
+import allRestaurants from './containers/allRestaurants';
 import Home from './containers/Home';
 import { Link } from 'react-router-dom';
 
@@ -62,6 +63,7 @@ class App extends Component {
             <Route path='/signup' component={signup}/>
             <Route path='/users/:username' exact component={userPage}/>
             <Route path='/users/:username/settings' component={userSettings}/>
+            <Route path='/restaurants' exact component={allRestaurants}/>
             <Route path='/restaurants/:restaurant_name' component={restaurantPage}/>
           </Switch>
         </div>

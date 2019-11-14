@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {searching, search, clear} from '../actions/RestaurantActions';
+import {searching, search} from '../actions/RestaurantActions';
 
 function SearchBar (props) {
 
@@ -9,7 +9,7 @@ function SearchBar (props) {
             onSubmit={(e) => {
                 e.preventDefault(); 
                 props.search(props.searchTerm, props.start, props.lat, props.lon, props.sort, props.order);
-                props.clear();
+                props.history.push('/restaurants')
             }} 
             className="search"
         >
@@ -39,7 +39,6 @@ function msp (state) {
 
 export default connect(msp, {
     searching,
-    search,
-    clear
+    search
 })(SearchBar);
 
