@@ -4,8 +4,8 @@ const defaultState = {
     results: [],
     lat: '',
     lon: '',
-    sort: 'cost',
-    order: 'asc',
+    sort: '',
+    order: '',
     start: 0,
     photos: [],
     background: [],
@@ -29,7 +29,7 @@ function restaurantReducer (state = defaultState, action) {
         case 'SEARCH':
             return {...state, results: action.payload};
         case 'CLEAR':
-            return {...state, searchTerm: ''};
+            return {...state, searchTerm: '', sort: '', order: ''};
         case 'GET PHOTOS':
             return {...state, photos: action.payload};
         case 'GET BACKGROUND':
