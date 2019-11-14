@@ -20,6 +20,7 @@ class userPage extends Component {
     };
 
     handleReceivedMessage = response => {
+        console.log('creating message')
         const { message } = response;
         const conversations = [...this.props.conversations];
         const conversation = conversations.find(
@@ -45,7 +46,6 @@ class userPage extends Component {
                     />
                     );
                 })}
-
                 <RoomList />
                 <MessageList />
                 <NewRoomForm />

@@ -2,7 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {writeMessage, 
         clearForms,
-        postMessage} from '../actions/MessengerActions';
+        postMessage,
+        getAllConvos} from '../actions/MessengerActions';
 
 function SendMessageForm (props) {
 
@@ -15,6 +16,7 @@ function SendMessageForm (props) {
             user_name: props.currentUser.name
         };
         props.postMessage(message);
+        props.getAllConvos();
         props.clearForms();
     };
 
@@ -43,5 +45,6 @@ function msp (state) {
 export default connect(msp,{
     writeMessage,
     clearForms,
-    postMessage
+    postMessage,
+    getAllConvos
 })(SendMessageForm);
