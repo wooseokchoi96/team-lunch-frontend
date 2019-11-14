@@ -5,7 +5,7 @@ import RoomList from '../components/RoomList';
 import SendMessageForm from '../components/SendMessageForm';
 import {connect} from 'react-redux';
 import {logOut} from '../actions/AuthActions';
-import {getAllConvos, addConvo, addMessage} from '../actions/MessengerActions';
+import {getAllConvos, addConvo, addMessage, setActiveConversation} from '../actions/MessengerActions';
 import { ActionCableConsumer } from 'react-actioncable-provider';
 
 class userPage extends Component {
@@ -14,20 +14,24 @@ class userPage extends Component {
         this.props.getAllConvos();
     }
 
+
     handleReceivedConversation = response => {
         const { conversation } = response;
         this.props.addConvo(conversation);
     };
 
     handleReceivedMessage = response => {
-        console.log('creating message')
+        console.log('sending message')
+        console.log(this.props.conversations)
         const { message } = response;
+        console.log(message)
         const conversations = [...this.props.conversations];
         const conversation = conversations.find(
             conversation => conversation.id === message.conversation_id
         );
         conversation.messages = [...conversation.messages, message];
-        this.props.addMessage(conversations);
+        this.props.addMessage([...this.props.conversations]);
+        this.props.setActiveConversation(conversation);
     };
 
     render(){
@@ -66,5 +70,6 @@ export default connect(msp,{
     logOut,
     getAllConvos,
     addConvo,
-    addMessage
+    addMessage,
+    setActiveConversation
 })(userPage);

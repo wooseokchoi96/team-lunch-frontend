@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import {writeMessage, 
         clearForms,
         postMessage,
-        getAllConvos} from '../actions/MessengerActions';
+        getAllConvos
+        } from '../actions/MessengerActions';
 
 function SendMessageForm (props) {
 
