@@ -21,10 +21,7 @@ class userPage extends Component {
     };
 
     handleReceivedMessage = response => {
-        console.log('sending message')
-        console.log(this.props.conversations)
         const { message } = response;
-        console.log(message)
         const conversations = [...this.props.conversations];
         const conversation = conversations.find(
             conversation => conversation.id === message.conversation_id
