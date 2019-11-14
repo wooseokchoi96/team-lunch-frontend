@@ -9,8 +9,8 @@ class Home extends Component {
 
     componentDidMount() {
         this.getLocation()
-        this.props.getPhotos()
         this.props.getBackground()
+        this.props.getPhotos()
     };
 
     render(){

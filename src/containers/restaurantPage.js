@@ -30,10 +30,10 @@ class restaurantPage extends Component {
             this.allSlides[i].style.display = "none";
         }
         for (let i = 0; i < this.allDots.length; i++) {
-            this.allDots[i].className = this.allDots[i].className.replace(" active", "");
+            this.allDots[i].className = this.allDots[i].className.replace(" active1", "");
         }
         this.allSlides[this.slideIndex].style.display = "block";
-        this.allDots[this.slideIndex].className += " active";
+        this.allDots[this.slideIndex].className += " active1";
     };
 
     render() {

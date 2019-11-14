@@ -31,7 +31,6 @@ function MenuListComposition(props) {
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
-
     setOpen(false);
   };
 
@@ -69,7 +68,7 @@ function MenuListComposition(props) {
             {...TransitionProps}
             style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
           >
-            <Paper>
+            <Paper className='user-options'>
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                   <MenuItem onClick={handleClose}><Link style={{textDecoration: 'none', color: 'black'}} to={`/users/${props.currentUser.username}`}>Messages</Link></MenuItem>
@@ -92,3 +91,4 @@ function msp (state) {
 };
 
 export default connect(msp,{logOut})(MenuListComposition);
+
