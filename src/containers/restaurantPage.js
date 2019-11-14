@@ -38,28 +38,30 @@ class restaurantPage extends Component {
     render() {
         return (
             <div className='RestaurantPage'>
-                <div className="slideshow-container">
-                    {this.props.photos.map((photo, index) => {
-                        return (
-                            <div key={index} ref={(ref) => this.allSlides[index] = ref} className="mySlides fade">
-                                <div className="numbertext">{index + 1} / {this.props.photos.length}</div>
-                                <img src={photo} alt='' style={{width:'100%'}} />
-                            </div>
-                        );
-                    })}
+                <div className='Carousel'>
+                    <div className="slideshow-container">
+                        {this.props.photos.map((photo, index) => {
+                            return (
+                                <div key={index} ref={(ref) => this.allSlides[index] = ref} className="mySlides fade">
+                                    <div className="numbertext">{index + 1} / {this.props.photos.length}</div>
+                                    <img className='CarImg' src={photo} alt='' />
+                                </div>
+                            );
+                        })}
 
-                    <button className="prev" onClick={() => this.plusSlides(-1)}>&#10094;</button> 
-                    <button className="next" onClick={() => this.plusSlides(1)}>&#10095;</button>
-                </div>
+                        <button className="prev" onClick={() => this.plusSlides(-1)}>&#10094;</button> 
+                        <button className="next" onClick={() => this.plusSlides(1)}>&#10095;</button>
+                    </div>
 
-                <br />
+                    <br />
 
-                <div style={{textAlign:'center'}}>
-                    {this.props.photos.map((photo, index) => {
-                        return (
-                            <span key={index} ref={(ref) => this.allDots[index] = ref} className="dot" onClick={() => this.currentSlide(index)}></span>
-                        );
-                    })}
+                    <div className='Carousel-Dots' >
+                        {this.props.photos.map((photo, index) => {
+                            return (
+                                <span key={index} ref={(ref) => this.allDots[index] = ref} className="dot" onClick={() => this.currentSlide(index)}></span>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
         );
