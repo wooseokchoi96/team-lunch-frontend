@@ -333,6 +333,7 @@ code {
 
 .Carousel {
   grid-area: r;
+  z-index: -1;
 }
 
 .CarImg {
